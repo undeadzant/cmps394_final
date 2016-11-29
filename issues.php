@@ -1,67 +1,18 @@
-<!DOCTYPE html>
+<?php
+define('MyConst', TRUE);
+$header = 'Louisiana Emergency Response';
+$title = 'Issue';
+include_once 'includes/header.php';
+include_once 'includes/navigation.php';
+include_once 'includes/sidebar_right.php';
+?>
 
-<html>
 
-<head>
-<title></title>
-<link type="text/css" rel="stylesheet" href="stylesheet.css">
-</head>
-
-<body>
-
-<div id="header">
-
-<h3>Louisiana Emergency Contact</h3>
-
-</div>
-
-<div id="navbar">
-
-   <ul> 
-
-    <li><a href="index.html">Home</a></li>
-    <li><a href="issues.html">Report An Issue</a></li> 
-    <li><a href="">Volunteers</a></li> 
-    <li><a href="">Emergency Personnel</a></li>
-    <li><a href="">Log-In</a></li>      
-
-   </ul>   
-
-</div>
-
-<div class="sideright">
-
-<h2>News</h2>
-
-<p> Placeholder </p>
-<p> Placeholder </p>
-<p> Placeholder </p>
-<p> Placeholder </p>
-<p> Placeholder </p>
-
-</div>
-
-<div class="sideright">
-
-<h2>FAQs</h2>
-
-<p> Placeholder </p>
-<p> Placeholder </p>
-<p> Placeholder </p>
-<p> Placeholder </p>
-<p> Placeholder </p>
-
-</div>
-
-<div>
-
-<img class="imagesidebar" src="louisianamap.gif">
-
-</div>
 
 <div class="main">
 
 <h1>Report an Issue</h1>
+
 <p>
 Hi, please enable location services in order to report your issues.
 </p>
@@ -75,6 +26,8 @@ Hi, please enable location services in order to report your issues.
 <button onclick="getLocation()">Try It</button>
 
 <div id="mapholder"></div>
+
+</div>
 
 <script>
 var x = document.getElementById("demo");
@@ -116,28 +69,6 @@ function showError(error) {
 }
 </script>
 
-</p>
-
-
-</div>
-
-
-
-<div id="footer">
-
-   <ul> 
-
-    <li><a href="">About</a></li> 
-    <li><a href="">Help</a></li> 
-    <li><a href="">Contact Us</a></li> 
-
-   </ul> 
-
-
-
-</div>
-
-
-</body>
-
-</html>
+<?php
+    include_once 'includes/footer.php';
+?>
