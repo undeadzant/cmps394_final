@@ -4,12 +4,12 @@ if(!defined('MyConst')) {
 }
 ?>
 
-<div class="col-sm-3 col-md-2 sidebar">
-    <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Emergencies</a></li>
-        <li><a href="#">Personnel</a></li>
-        <li><a href="#">Update Info</a></li>
+<div class="col-sm-3 col-md-2 sidebar" role="navigation">
+    <ul class="nav nav-sidebar" role="tablist">
+        <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview <span class="sr-only">(current)</span></a></li>
+        <li role="presentation"><a href="#emergencies" aria-controls="emergencies" role="tab" data-toggle="tab">Emergencies</a></li>
+        <li role="presentation"><a href="#personnel" aria-controls="personnel" role="tab" data-toggle="tab">Personnel</a></li>
+        <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Update Info</a></li>
 <!--         <li><a href="#">Reports</a></li>
         <li><a href="#">Analytics</a></li>
         <li><a href="#">Export</a></li> -->

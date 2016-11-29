@@ -3,6 +3,8 @@ if(!defined('MyConst')) {
    die('Direct access not permitted');
 }
 ?>
+<!-- close the wrapper -->
+</div>
 <div id="footer">
 
    <ul> 
@@ -24,8 +26,11 @@ if(!defined('MyConst')) {
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
     crossorigin="anonymous"></script>
 <?php if (isset($js)) {
-    echo '<script type="text/javascript" src=' . $js . '>';
+    foreach ($js as $value) {
+      echo '<script src=' . $value . '></script>';
+    }    
 } ?>
+
 
 </body>
 

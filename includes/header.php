@@ -15,15 +15,17 @@ if(!defined('MyConst')) {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link type="text/css" rel="stylesheet" href="/cmps394_final/resources/stylesheet.css">
 <?php if (isset($css)) {
-    echo '<link type="text/css" rel="stylesheet" href="' . $css . '">';
+    foreach ($css as $value) {
+        echo '<link type="text/css" rel="stylesheet" href="' . $value . '">';
+    }    
 } ?>
 
 </head>
 
 <body>
+<div class="wrapper">
+    <div id="header">
 
-<div id="header">
+        <h3><?php echo $header; ?></h3>
 
-<h3><?php echo $header; ?></h3>
-
-</div>
+    </div>

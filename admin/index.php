@@ -3,7 +3,8 @@ define('MyConst', TRUE);
 session_start();
 $title = "admin";
 $header = "Louisiana Emergency Response Dispatch";
-$css = 'assets/stylesheet.css';
+$css = array('https://unpkg.com/leaflet@1.0.2/dist/leaflet.css', 'assets/stylesheet.css');
+$js = array('https://unpkg.com/leaflet@1.0.2/dist/leaflet.js', 'assets/map.js');
 include_once '../includes/dbconnect.php';
 include_once '../includes/header.php';
 ?>
@@ -38,6 +39,18 @@ include_once '../includes/header.php';
 <div class="container-fluid">
     <div class="row">
         <?php include_once 'sidebar_left.php'; ?>
+
+        <div class="col-sm-9 col-md-10">
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="overview"><?php include_once 'content/overview.php'; ?></div>
+                <div role="tabpanel" class="tab-pane" id="emergencies"><?php include_once 'content/emergencies.php'; ?></div>
+                <div role="tabpanel" class="tab-pane" id="personnel"><?php include_once 'content/personnel.php'; ?></div>
+                <div role="tabpanel" class="tab-pane" id="info"><?php include_once 'content/info.php'; ?></div>
+            </div>
+            
+        </div>
+
     </div>
     
 </div>
