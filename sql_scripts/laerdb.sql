@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS Issues (
   email varchar(60),
   phone varchar(11),
   location point NOT NULL,
-  SPATIAL INDEX(location),
   issue varchar(255),
   issue_type varchar(20),
   is_resolved boolean NOT NULL DEFAULT 0,
@@ -29,6 +28,7 @@ CREATE TABLE IF NOT EXISTS Issues (
   created_at timestamp NOT NULL,
   resolved_at datetime,
   p_id int,
+  SPATIAL INDEX(location),
   PRIMARY KEY (id),
   FOREIGN KEY (p_id) REFERENCES Personnel(id)
 );
@@ -36,4 +36,13 @@ CREATE TABLE IF NOT EXISTS Issues (
 INSERT INTO Personnel 
     (name, email, phone, password, is_dispatcher)
     VALUES 
-    ('admin', 'admin@localhost.tld', '5558675309', MD5('secret'), 1);
+    ('admin', 'admin@localhost.tld', '5558675309', MD5('secret'), 1),
+    ('billy', 'william.williamson-2@selu.edu', '9852857237', MD5('secret'), 1),
+    ('craig', 'billy@147tech.com', '5556660000', MD5('secret'), 0),
+    ('dee', 'wewill147@gmail.com', '9852857237', MD5('secret'), 0);
+
+INSERT INTO Issues
+    (name, email, phone, location, issue, issue_type)
+    VALUES
+    ('foo', 'foo@bar.com', '9995554321', Point(30.5145858,-90.4667071), 'Got in an accident, with injury.', 'medical'),
+    ('bar', 'bar@foo.com', '6665554444', Point(30.4945858,-90.4687071), 'Lord Jesus, its a fire!', 'fire');

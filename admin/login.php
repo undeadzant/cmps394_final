@@ -18,11 +18,7 @@ if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $sql = "SELECT * FROM Personnel WHERE email = '" . $email. "' and password = '" . md5($password) . "'";
-    //$result = mysqli_query($conn, "SELECT * FROM Personnel WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
-
-    echo $email . "\n";
-    echo $password . "\n";
-    echo $sql . "\n";
+    
     $result = $conn->query($sql);
 
     if ($row = mysqli_fetch_array($result)) {
