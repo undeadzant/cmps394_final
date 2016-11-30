@@ -30,8 +30,3 @@ if(!defined('MyConst')) {
       echo '<script src=' . $value . '></script>';
     }    
 } ?>
-
-
-</body>
-
-</html>

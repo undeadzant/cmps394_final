@@ -24,6 +24,7 @@ if (isset($_POST['login'])) {
     if ($row = mysqli_fetch_array($result)) {
         $_SESSION['usr_id'] = $row['id'];
         $_SESSION['usr_name'] = $row['name'];
+        $_SESSION['usr_admin'] = $row['is_dispatcher'];
         header("Location: index.php");
     } else {
         $errormsg = "Incorrect Email or Password!!!";

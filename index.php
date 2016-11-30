@@ -25,3 +25,7 @@ include_once 'includes/sidebar_right.php';
 <?php
     include_once 'includes/footer.php';
 ?>
+
+</body>
+
+</html>

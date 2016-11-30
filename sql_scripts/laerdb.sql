@@ -44,5 +44,5 @@ INSERT INTO Personnel
 INSERT INTO Issues
     (name, email, phone, location, issue, issue_type)
     VALUES
-    ('foo', 'foo@bar.com', '9995554321', Point(30.5145858,-90.4667071), 'Got in an accident, with injury.', 'medical'),
-    ('bar', 'bar@foo.com', '6665554444', Point(30.4945858,-90.4687071), 'Lord Jesus, its a fire!', 'fire');
+    ('foo', 'foo@bar.com', '9995554321', Point(30.2958194,-89.7219651), 'Got in an accident, with injury.', 'medical'),
+    ('bar', 'bar@foo.com', '6665554444', Point(30.5945858,-91.4687071), 'Lord Jesus, its a fire!', 'fire');

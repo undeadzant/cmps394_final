@@ -1,40 +1,27 @@
 <?php
-define('MyConst', TRUE);
-session_start();
-$title = "admin";
-$header = "Louisiana Emergency Response Dispatch";
-$css = array('https://unpkg.com/leaflet@1.0.2/dist/leaflet.css', 'assets/stylesheet.css');
-$js = array('https://unpkg.com/leaflet@1.0.2/dist/leaflet.js', 'assets/map.js');
-include_once '../includes/dbconnect.php';
-include_once '../includes/header.php';
+    define('MyConst', TRUE);
+    session_start();
+    $title = "admin";
+    $header = "Louisiana Emergency Response Dispatch";
+    $css = array('https://unpkg.com/leaflet@1.0.2/dist/leaflet.css', 'assets/stylesheet.css');
+    $js = array('https://unpkg.com/leaflet@1.0.2/dist/leaflet.js');
+    include_once '../includes/dbconnect.php';
+    include_once '../includes/header.php';
+    include_once 'admin_nav.php';
+
+    if (!isset($_SESSION['usr_id'])) { 
+        header("Location: login.php");
+    }
+
+    $issue_sql = "SELECT id, name, issue_type, issue, X(location), Y(location), created_at FROM Issues";
+    $issue_result = $conn->query($issue_sql);
+    $issue_map = $conn->query($issue_sql);
+    $issue_row = $issue_map->fetch_all();
+    $personnel_sql = "SELECT * FROM Personnel";
+    $personnel_result = $conn->query($personnel_sql);
+
+    $conn->close();
 ?>
-<?php if (!isset($_SESSION['usr_id'])) { 
-    header("Location: login.php");
-}?>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.php">Dispatch Dashboard</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar1">
-            <ul class="nav navbar-nav navbar-right">
-                <?php if (isset($_SESSION['usr_id'])) { ?>
-                <li><p class="navbar-text">Signed in as <?php echo $_SESSION['usr_name']; ?></p></li>
-                <li><a href="logout.php">Log Out</a></li>
-                <?php } else { ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Sign Up</a></li>
-                <?php } ?>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <div class="container-fluid">
     <div class="row">
@@ -43,10 +30,18 @@ include_once '../includes/header.php';
         <div class="col-sm-9 col-md-10">
 
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="overview"><?php include_once 'content/overview.php'; ?></div>
-                <div role="tabpanel" class="tab-pane" id="emergencies"><?php include_once 'content/emergencies.php'; ?></div>
-                <div role="tabpanel" class="tab-pane" id="personnel"><?php include_once 'content/personnel.php'; ?></div>
-                <div role="tabpanel" class="tab-pane" id="info"><?php include_once 'content/info.php'; ?></div>
+                <div role="tabpanel" class="tab-pane active" id="overview">
+                    <?php include_once 'content/overview.php'; ?>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="emergencies">
+                    <?php $result = $issue_result; include_once 'content/emergencies.php'; ?>                    
+                </div>
+                <div role="tabpanel" class="tab-pane" id="personnel">
+                    <?php $result = $personnel_result; include_once 'content/personnel.php'; ?>                    
+                </div>
+                <div role="tabpanel" class="tab-pane" id="info">
+                    <?php include_once 'content/info.php'; ?>
+                </div>
             </div>
             
         </div>
@@ -55,9 +50,29 @@ include_once '../includes/header.php';
     
 </div>
 
+
+
 <?php 
     include_once '../includes/footer.php';
 ?>
+
+<script type="text/javascript">
+    var mymap = L.map('mapid').setView([30.504358, -90.461197], 9);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: 'LeoGeo'
+    }).addTo(mymap);
+
+    var colorCode = {'fire': 'red', 'medical': 'blue', 'police': 'black', 'other': 'yellow', 'resolved': 'green'};
+
+    var data = <?php echo json_encode($issue_row); ?>;
+    for(var i=0;i<data.length;i++) {
+        console.log(data[i]);
+        var coor = [parseFloat(data[i][4]), parseFloat(data[i][5])];
+        console.log(coor);
+        L.circleMarker(coor, {radius:10,color:colorCode[data[i][2]]}).addTo(mymap);
+    };
+    
+</script>
 
 </body>
 </html>

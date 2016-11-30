@@ -6,33 +6,29 @@ if (!isset($_SESSION['usr_id'])) {
 }?>
 <h2>Personnel</h2>
 <?php
-    $sql = "SELECT * FROM Personnel";
-    $result = $conn->query($sql);
 
     echo "<table class=\"table table-hover\">";
-echo "<thead><tr>";
-echo "<th>ID</th>";
-echo "<th>Name</th>";
-echo "<th>Email</th>";
-echo "<th>Phone</th>";
-echo "<th>On Call</th>";
-echo "</tr></thead><tbody>";
+    echo "<thead><tr>";
+    echo "<th>ID</th>";
+    echo "<th>Name</th>";
+    echo "<th>Email</th>";
+    echo "<th>Phone</th>";
+    echo "<th>On Call</th>";
+    echo "</tr></thead><tbody>";
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["name"] . "</td>";
-        echo "<td>" . $row["email"] . "</td>";
-        echo "<td>" . $row["phone"] . "</td>";
-        echo "<td>" . $row["on_call"] . "</td>";
-        echo "</tr>";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["id"] . "</td>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td>" . $row["email"] . "</td>";
+            echo "<td>" . $row["phone"] . "</td>";
+            echo "<td>" . $row["on_call"] . "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td>No Results</td></tr>";
     }
-} else {
-    echo "<tr><td>No Results</td></tr>";
-}
-echo "</tbody></table>";
-
-$conn->close();
+    echo "</tbody></table>";
 
 ?>
